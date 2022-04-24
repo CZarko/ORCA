@@ -6,18 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ORCAration</title>
     
-    <link rel="stylesheet" href="./index.css"/>
+    <style media='screen', type='text/css'>
+        @font-face {
+            font-family: "primaryFont";
+            src: url('./assets/font/NECMobile.ttf');
+        }
+
+        canvas {
+            display: block;
+            margin: auto;
+        }
+        h1 {
+            font-family: 'primaryFont';
+        }
+    </style>
+
 
     <script src="./lib/phaser.js"></script>
+
+    <script src="./src/prefabs/player.js"></script>
 
     <script src="./src/scenes/load.js"></script>
     <script src="./src/scenes/menu.js"></script>
     <script src="./src/scenes/play.js"></script>
-    <script src="./src/scenes/gameOver.js"></script>
 
-    <script src="./src/main.js"></script>
+    
 </head>
 <body>
-    
+    <div style="font-family: 'primaryFont'">.</div>
+    <script src="./src/main.js"></script>
 </body>
 </html>
