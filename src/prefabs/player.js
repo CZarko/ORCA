@@ -2,6 +2,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene,x,y) {
         super(scene,x,y,'player');
         scene.add.existing(this);
+        scene.physics.add.existing(this);
         
         // anim config for player
         /*scene.anims.create({
@@ -27,13 +28,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         
         this.lives = 4;
 
-        this.jumpPower = 0;
+        this.jumpPower = 500;
 
         //player jump loifuq?
-        this.body.setAllowGravity(false);
-        this.body.moves(true);
-        this.vody.gravity.y = 100;
-        scene.input.on('pointerdown', () => {
+        this.body.setImmovable(true);
+        this.body.gravity.y = 500;
+        //this.body.collideWorldBounds = true;
+        /*scene.input.on('pointerdown', () => {
             this.jumpTimer = scene.time.addEvent({
                 delay: 100,
                 callback: () => {
@@ -43,11 +44,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 callbackScope: this,
                 loop: true
             });
-        }, this);
+        }, this);*/
         scene.input.on('pointerup', () => {
-            this.jumpTimer.remove();
-            this.setVelocityY(-this.jumpPower * 100);
-            this.jumpPower = 0;
+            //scene.time.removeEvent(this.jumpTimer);
+            //this.setVelocityY(-this.jumpPower * 100);
+            //this.jumpPower = 0;
+            this.setVelocityY(-this.jumpPower);
+            //this.sound.play('jump-sfx');
         }, this);
 
         scene.events.on('update', this.update, this);

@@ -8,16 +8,16 @@ class Load extends Phaser.Scene {
 
         this.load.path = './assets/';
         // load graphic assets
-        this.load.image('background', 'img/background.png');
-        this.load.image('player', 'img/tile.png');
-        this.load.image('obstacle', 'img/tile.png');
-        this.load.image('platform', 'img/tile.png');
+        this.load.image('background', 'img/sample.png');
+        this.load.image('player', 'img/orca_draft.png');
+        this.load.image('obstacle', 'img/office_building.png');
+        this.load.spritesheet('explosion', 'img/explosion.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 13});
+        // load sfx assets
+        //this.load.audio('jump-sfx','sound/waterSplash.mp3');
+        //this.load.audio('crash-sfx','sound/Crash.mp3');
     }
 
     create() {
-        // global key assignment
-        //keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
         this.scene.start("Menu");
     }
 }
