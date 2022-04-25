@@ -28,7 +28,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         
         this.lives = 4;
 
-        this.jumpPower = 500;
+        this.jumpPower = 250;
 
         //player jump loifuq?
         this.body.setImmovable(true);
