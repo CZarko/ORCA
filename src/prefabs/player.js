@@ -3,6 +3,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene,x,y,'player');
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        this.setOrigin(0.5);
         
         // anim config for player
         /*scene.anims.create({
@@ -52,11 +53,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityY(-this.jumpPower);
             //this.sound.play('jump-sfx');
         }, this);
-
+        
         scene.events.on('update', this.update, this);
     }
 
     update(){
+        //
+        //this.setRotation( Math.atan2(this.body.velocity.y, this.body.velocity.x)/2);
         /*if(!this.animInit) {
             switch(this.animNum) {
                 case 0:
@@ -78,3 +81,4 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         //if space key pressed, set player y velocity to -100
     }
 }
+

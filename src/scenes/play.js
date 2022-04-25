@@ -39,6 +39,7 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+        this.tweens.add({targets: this.player, rotation: Math.atan2(this.player.body.velocity.y, this.player.body.velocity.x)/2, ease: 'Exponential', duration: 200});
         if(!this.gameOver) {
             //check for player jump input
         
