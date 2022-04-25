@@ -26,7 +26,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.animNum = 0;
         this.animInit = false;*/
         
-        this.lives = 4;
+        this.lives = 1;
 
         this.jumpPower = 250;
 
