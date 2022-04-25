@@ -16,20 +16,15 @@ const config = {
 
 // define and assing Phaser game
 const game = new Phaser.Game(config);
+game.settings = {
+    obsSpawnRate: {min: 0, max: 0},
+    obsSpeed: 0,
+    jumpPower: 250,
+    score: 0
+};
 
 // define game globals
-let platformOptions = {
-    platformStartSpeed: 350,
-    spawnRange: [100, 350],
-    platformSizeRange: [50, 250]
-    //player gravity
-    //jump force
-}
-
 let xCentered = game.config.width/2;
 let yCentered = game.config.height/2;
 let hPadding = game.config.width/8;
 let vPadding = game.config.height/6;
-
-// global key declarations
-let keySpace;

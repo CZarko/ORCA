@@ -7,7 +7,15 @@ class Play extends Phaser.Scene {
         this.gameOver = false;
         this.gameSpeed = 5;
 
-        this.background = this.add.tileSprite(0,0,game.config.width, game.config.height, 'background').setOrigin(0,0);
+        this.bg = this.add.sprite(0,0,'bg').setOrigin(0);
+        this.buildings = [];
+        let tmp = this.add.tileSprite(0,game.config.height-477,game.config.width,477,'back-building').setOrigin(0);
+        this.buildings.push(tmp);
+        tmp = this.add.tileSprite(0,game.config.height-215,game.config.width,215,'mid-building').setOrigin(0);
+        this.buildings.push(tmp);
+        tmp = this.add.tileSprite(0,game.config.height-146,game.config.width,146,'fore-building').setOrigin(0);
+        this.buildings.push(tmp);
+
         this.player = new Player(this, hPadding*2, yCentered, 'player');
         
         this.obstacles = [];
@@ -19,6 +27,15 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('explosion', {start: 0, end: 13, first: 0}),
             frameRate: 30
         });
+
+        let fixedWidth = 50;
+        this.scoreText = this.add.text(game.config.width - fixedWidth, 50, game.settings.score, {fontFamily: 'primaryFont', fontSize: '64px', color: '#FBFBFF', fixedWidth: fixedWidth}).setOrigin(0.5);
+
+        this.gameOverText = this.add.text(game.config.width/2, game.config.height/2, 'Game Over', {fontFamily: 'primaryFont', fontSize: '64px', color: '#FBFBFF'}).setOrigin(0.5);
+        this.gameOverText.setVisible(false);
+    
+        this.restartText = this.add.text(game.config.width/2, game.config.height/2+vPadding/2, 'Click to Restart',  {fontFamily: 'primaryFont', fontSize: '32px', color: '#FBFBFF'}).setOrigin(0.5);
+        this.restartText.setVisible(false);
     }
 
     update() {
@@ -27,7 +44,8 @@ class Play extends Phaser.Scene {
         
             //background always moving in one direction
             //background moving
-            this.background.tilePositionX += 5; //background moves at same speed as player
+            for(let i = 0; i < this.buildings.length; ++i)
+                this.buildings[i].tilePositionX += 1 + i*2; //background moves at same speed as player
             
             //speed increases over time up to a cieling
 
@@ -43,6 +61,7 @@ class Play extends Phaser.Scene {
             this.gameOver = true;
         }
         //decrease player speed
+        this.scoreText.text = game.settings.score;
     }
 
     spawnObstacle() {
@@ -51,6 +70,11 @@ class Play extends Phaser.Scene {
 
         let upperObj = new Obstacle(this, gapY - (game.config.height + gapHeight/2), true);
         let lowerObj = new Obstacle(this, gapY + (game.config.height + gapHeight/2), false);
+        this.time.delayedCall(6000, () => {
+            game.settings.score += 1;
+            upperObj.destroy();
+            lowerObj.destroy();
+        }, null, this);
 
         let spawn = this.time.delayedCall(Phaser.Math.Between(500,4000), this.spawnObstacle, null, this);
     }
@@ -67,13 +91,11 @@ class Play extends Phaser.Scene {
     }
 
     gameOverScreen() {
-        let textConfig = {
-            fontFamily: 'primaryFont', 
-            fontSize: '32px',
-            color: '#FBFBFF',
-        };
-        let t = this.add.text(game.config.width/2, game.config.height/2, 'Game Over', textConfig).setOrigin(0.5);
+        this.gameOverText.setVisible(true);
+        this.restartText.setVisible(true);
         this.input.once('pointerup', () => {
+            this.gameOverText.setVisible(false);
+            this.restartText.setVisible(false);
             this.gameOver = false;
             this.player.alpha = 1;
         });

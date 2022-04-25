@@ -14,6 +14,6 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite {
             scene.gameOver = true;
             scene.crash();
         });
-        scene.time.delayedCall(5000 , () => { this.destroy(); }, null, scene);
+        //scene.time.delayedCall(5000 , () => { this.destroy(); }, null, scene);
     }
 }
