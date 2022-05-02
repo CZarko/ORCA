@@ -1,4 +1,10 @@
-// define and assign main Phaser game object config
+/*
+Collaborators: Alan L, Jesus N, Caleb Z, Kaeden Y
+Game Title: I Believe I Can Orca
+Date of Completion: 5/2/2022
+Creative Tilt Justification: 
+*/
+
 const config = {
     type: Phaser.CANVAS,
     width: 960,
@@ -6,7 +12,6 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            //gravity: 0
             debug: false
         }
     },
@@ -14,13 +19,14 @@ const config = {
 }
 
 
-// define and assing Phaser game
+// definition and assignment of Phaser game and game settings
 const game = new Phaser.Game(config);
 game.settings = {
-    obsSpawnRate: {min: 0, max: 0},
-    obsSpeed: 0,
-    jumpPower: 250,
-    score: 0
+    planeSpawnRate: {min: 1000, max: 3000},
+    planeSpeed: {min: 5, max: 8},
+    gravity: 500,
+    jumpPower: 300,
+    highscore: 0
 };
 
 // define game globals

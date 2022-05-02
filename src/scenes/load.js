@@ -4,19 +4,22 @@ class Load extends Phaser.Scene {
     }
 
     preload() {
-        //let loadingBar = this.add.graphics()
-
         this.load.path = './assets/';
+
         // load graphic assets
-        this.load.image('bg', 'img/sky.png');
+        this.load.image('menu-bg', 'img/i_can_orca.jpg');
+
+        this.load.image('bg-back', 'img/sky-v2.jpg');
+        this.load.image('bg-front', 'img/sky.png');
         this.load.image('back-building', 'img/big_back_buildings.png');
         this.load.image('mid-building', 'img/medium_mid_buildings.png');
         this.load.image('fore-building', 'img/small_front_buildings.png')
 
-
         this.load.image('player', 'img/orca_draft.png');
-        this.load.image('obstacle', 'img/office_building.png');
+        this.load.image('jet-plane', 'img/jet_plane.png');
+        this.load.image('big-plane', 'img/big_airplane.png');
         this.load.spritesheet('explosion', 'img/explosion.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 13});
+
         // load sfx assets
         //this.load.audio('jump-sfx','sound/waterSplash.mp3');
         //this.load.audio('crash-sfx','sound/Crash.mp3');
