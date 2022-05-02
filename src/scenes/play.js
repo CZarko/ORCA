@@ -16,6 +16,17 @@ class Play extends Phaser.Scene {
         this.bgBack = this.add.sprite(0,0,'bg-back').setOrigin(0);
         this.bgFront = this.add.sprite(0,0,'bg-front').setOrigin(0);
 
+        // Creation of clouds array and init call to spawnCloud func
+        this.clouds = [];
+        this.spawnCloud();
+
+        // Displays current score (Time Survived)
+        this.scoreText = this.add.text(xCentered, yCentered, this.score, {fontFamily: 'primaryFont', fontSize: '200px', align: 'right', color: '#FBFBFF', fixedWidth: 910}).setOrigin(0.5);
+        // Updates score after 1 second delay
+        this.clock = this.time.delayedCall(1000, () => {
+            this.updateScore();
+        }, null, this);
+
         this.buildings = [];
         //Create background tile sprite
         let tmp = this.add.tileSprite(0,game.config.height-477,game.config.width,477,'back-building').setOrigin(0);
@@ -27,16 +38,17 @@ class Play extends Phaser.Scene {
         tmp = this.add.tileSprite(0,game.config.height-146,game.config.width,146,'fore-building').setOrigin(0);
         this.buildings.push(tmp);
 
-        // Displays current score (Time Survived)
-        this.scoreText = this.add.text(xCentered, yCentered, this.score, {fontFamily: 'primaryFont', fontSize: '200px', align: 'right', color: '#FBFBFF', fixedWidth: 910}).setOrigin(0.5);
-
-
         //Player Sprite
         this.player = new Player(this, hPadding*2, yCentered, 'player');
         
         // Creation of planes array and init call to spawnPlane func
         this.planes = [];
         this.spawnPlane();
+
+        // SHHHHHHHHHH... no one needs to know
+        this.input.keyboard.on('keydown-'+'P', () => {
+            this.spawnPlane();
+        });
 
         // animation config for explosion
         this.anims.create({
@@ -45,20 +57,20 @@ class Play extends Phaser.Scene {
             frameRate: 30
         });
 
-        //Create Clock for score
-        this.clock = this.time.delayedCall(1000, () => {
-            this.updateScore();
-        }, null, this);
-
-        
-
         // Displays end of game Text
-        this.gameOverText = this.add.text(game.config.width/2, game.config.height/2, 'Game Over', {fontFamily: 'primaryFont', fontSize: '64px', color: '#FBFBFF'}).setOrigin(0.5);
+        this.gameOverText = this.add.text(game.config.width/2, game.config.height/2, 'Game Over', {fontFamily: 'primaryFont', fontSize: '64px', color: '#C41E3A'}).setOrigin(0.5);
+        this.gameOverText.setShadow(0,5,'rgba(0,0,0,1)',0);
         this.gameOverText.setVisible(false);
     
         // Displays game reset text
-        this.restartText = this.add.text(game.config.width/2, game.config.height/2+vPadding/2, 'Click to Restart',  {fontFamily: 'primaryFont', fontSize: '32px', color: '#FBFBFF'}).setOrigin(0.5);
+        this.restartText = this.add.text(game.config.width/2, game.config.height/2+vPadding/2, 'Click to Restart or press ESC for Menu',  {fontFamily: 'primaryFont', fontSize: '32px', color: '#FBFBFF'}).setOrigin(0.5);
+        this.restartText.setShadow(0,5,'rgba(0,0,0,1)',0);
         this.restartText.setVisible(false);
+
+        // Esc key returns player to menu
+        this.input.keyboard.on('keydown-'+'ESC', () => {
+            this.scene.start('Menu');
+        });
     }
     
     update() {
@@ -98,8 +110,23 @@ class Play extends Phaser.Scene {
 
             this.restartGame = false;
         }
+
+        for(let cloud of this.clouds) {
+            if(cloud.x < -game.settings.width*2) {
+                let c = cloud;
+                this.clouds.pop(cloud);
+                c.destroy();
+            }
+        }
        
         this.scoreText.text = this.score;
+    }
+
+    spawnCloud() {
+        this.clouds.push(new Cloud(this, Phaser.Math.Between(125,game.config.height-100)));
+        this.time.delayedCall(Phaser.Math.Between(game.settings.planeSpawnRate.min/2,game.settings.planeSpawnRate.max/2), () => {
+            this.spawnCloud();
+        }, null, this);
     }
 
     //Spawns the planes flying towards the players
@@ -114,6 +141,7 @@ class Play extends Phaser.Scene {
         }
     }
 
+    // Removes plane from planes array and destroy's their game object
     destroyPlane(plane) {
         this.planes.pop(plane);
         plane.destroy();

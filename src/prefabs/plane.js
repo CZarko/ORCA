@@ -1,9 +1,8 @@
 class Plane extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, y){
-        super(scene, game.config.width + 64, y, Phaser.Math.RND.pick(['jet-plane', 'big-plane']));
+        super(scene, game.config.width + 64, y, Phaser.Math.RND.pick(['jet-plane', 'big-plane'/*, 'fighter-jet'*/]));
         scene.add.existing(this);
         scene.physics.add.existing(this);
-
 
         this.body.setImmovable(true);
         this.setVelocityX(-(Phaser.Math.Between(game.settings.planeSpeed.min, game.settings.planeSpeed.max))*100);
@@ -13,5 +12,9 @@ class Plane extends Phaser.Physics.Arcade.Sprite {
             scene.gameOver = true;
             scene.crash();
         });
+
+        if(this.texture.key == 'fighter-jet') {
+            this.body.setAcceleration(-500,0);
+        }
     }
 }
