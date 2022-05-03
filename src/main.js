@@ -2,7 +2,11 @@
 Collaborators: Alan L, Jesus N, Caleb Z, Kaeden Y
 Game Title: I Believe I Can Orca
 Date of Completion: 5/2/2022
-Creative Tilt Justification: 
+Creative Tilt Justification:
+We added some atmosphere to the game by spawning clouds with purely aesthetic functionality.
+An array was used to keep track of all of the clouds, and a separate array was used to keep track of all of the planes present on the screen.
+To keep track of the score, we used a recursive function to decrease the amount of code that needed to be written.
+We are also proud of the art style of the game, as well as the concept of a flying orca trying to avoid air traffic.
 */
 
 const config = {

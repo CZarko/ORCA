@@ -163,7 +163,7 @@ class Play extends Phaser.Scene {
         }
     }
 
-    // Removes plane from planes array and destroy's their game object
+    // Removes plane from planes array and destroys their game object
     destroyPlane(plane) {
         this.planes.pop(plane);
         plane.destroy();
