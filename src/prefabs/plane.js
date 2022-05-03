@@ -1,6 +1,6 @@
 class Plane extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, y){
-        super(scene, game.config.width + 64, y, Phaser.Math.RND.pick(['jet-plane', 'big-plane'/*, 'fighter-jet'*/]));
+        super(scene, game.config.width + 64, y, Phaser.Math.RND.pick(['jet-plane', 'big-plane', 'fighter-jet']));
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
@@ -9,12 +9,14 @@ class Plane extends Phaser.Physics.Arcade.Sprite {
               
         //Checks to see if the plane has collided with the player
         scene.physics.add.collider(scene.player, this, () => {
-            scene.gameOver = true;
-            scene.crash();
+            if(!scene.player.invulnerable) {
+                scene.gameOver = true;
+                scene.crash();
+            }
         });
 
         if(this.texture.key == 'fighter-jet') {
-            this.body.setAcceleration(-500,0);
+            this.body.setAcceleration(-250,0);
         }
     }
 }

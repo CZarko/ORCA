@@ -9,6 +9,8 @@ class Play extends Phaser.Scene {
         this.restartGame = false;
         this.planeSpawning = false;
 
+        this.playerIFrames = true;
+
         // Game Score
         this.score = 0;
 
@@ -77,6 +79,14 @@ class Play extends Phaser.Scene {
         //tween player rotation dependent on y-velocity
         this.tweens.add({targets: this.player, rotation: Math.atan2(this.player.body.velocity.y, 0)/4, ease: 'Exponential', duration: 200});
 
+        if(this.playerIFrames) {
+            this.player.invulnerable = true;
+            this.tweens.add({targets: this.player, alpha: {from: 1, to: 0}, ease: 'Sine.easeInOut', duration: 500, repeat: 4, yoyo: true, onComplete: () => {
+                this.player.invulnerable = false;
+            }});
+            this.playerIFrames = false;
+        }
+
         //check if player has touched edges of game screen and if so end game
         if(this.player.body.checkWorldBounds()){
             this.gameOver = true;
@@ -132,7 +142,7 @@ class Play extends Phaser.Scene {
     //Spawns the planes flying towards the players
     spawnPlane() {
         this.planeSpawning = false;
-        this.planes.push(new Plane(this, Phaser.Math.Between(50, 390)));
+        this.planes.push(new Plane(this, Phaser.Math.Between(50, 470)));
         if(!this.gameOver) {
             this.planeSpawning = true;
             this.time.delayedCall(Phaser.Math.Between(game.settings.planeSpawnRate.min,game.settings.planeSpawnRate.max), () => {
@@ -188,6 +198,7 @@ class Play extends Phaser.Scene {
             this.player.alpha = 1;
             this.player.body.enable = true;
 
+            this.playerIFrames = true;
             this.restartGame = true;
         });
     }

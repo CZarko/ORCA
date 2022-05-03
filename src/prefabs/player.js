@@ -4,6 +4,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.setOrigin(0.5);
+
+        this.invulnerable = false;
         
         // anim config for player
         /*scene.anims.create({
