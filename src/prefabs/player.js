@@ -19,6 +19,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         // player jump loifuq?
         this.body.setImmovable(true);
+        this.body.setSize(this.width/2, this.height/4);
         this.body.gravity.y = game.settings.gravity;
         this.body.setDragY(game.settings.jumpPower/2);
         scene.input.on('pointerup', () => {
