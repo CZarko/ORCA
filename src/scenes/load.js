@@ -7,7 +7,7 @@ class Load extends Phaser.Scene {
         this.load.path = './assets/';
 
         // load graphic assets
-        this.load.image('menu-bg', 'img/i_can_orca.jpg');
+        this.load.image('menu-bg', 'img/orca_big.png');
 
         this.load.image('bg-back', 'img/sky-v2.jpg');
         this.load.image('bg-front', 'img/sky.png');
