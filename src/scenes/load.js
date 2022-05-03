@@ -26,11 +26,22 @@ class Load extends Phaser.Scene {
         this.load.spritesheet('explosion', 'img/explosion.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 13});
 
         // load sfx assets
+        this.load.audio('drifting-higher', ['sound/Drifting-Higher.mp3', 'sound/Drifting-Higher.ogg']);
+        this.load.audio('drifting-away', ['sound/Drifting-Away.mp3', 'sound/Drifting-Higher.ogg']);
         //this.load.audio('jump-sfx','sound/waterSplash.mp3');
         //this.load.audio('crash-sfx','sound/Crash.mp3');
     }
 
     create() {
+        let higher = game.sound.add('drifting-higher');
+        higher.volume = 0.1;
+        higher.play();
+        higher.on('complete', () => {
+            let away = game.sound.add('drifting-away');
+            away.volume = 0.1;
+            away.loop = true;
+            away.play();
+        });
         this.scene.start("Menu");
     }
 }
