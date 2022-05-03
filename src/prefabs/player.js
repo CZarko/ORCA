@@ -3,18 +3,19 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene,x,y,'player');
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        this.setScale(0.2);
         this.setOrigin(0.5);
 
         this.invulnerable = false;
         
         // anim config for player
-        /*scene.anims.create({
+        scene.anims.create({
             key: 'swim',
-            frames: this.anims.generateFrameNumbers('player-swim', {start:0, end:2, first: 0}),
+            frames: scene.anims.generateFrameNumbers('player', {start:0, end:2, first: 0}),
             frameRate: 10,
             repeat: -1
         });
-        this.anims.play('swim');*/
+        this.anims.play('swim');
 
         // player jump loifuq?
         this.body.setImmovable(true);

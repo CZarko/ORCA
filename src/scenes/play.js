@@ -73,6 +73,18 @@ class Play extends Phaser.Scene {
         this.input.keyboard.on('keydown-'+'ESC', () => {
             this.scene.start('Menu');
         });
+
+        this.anims.create({
+            key: 'click',
+            frames: this.anims.generateFrameNumbers('clicker', {start: 0, end: 4, first: 0}),
+            frameRate: 7,
+            repeat: -1
+        });
+        this.clicker = this.add.sprite(game.config.width - vPadding, game.config.height - vPadding,'clicker').setScale(0.1).setOrigin(0.5);
+        this.clicker.anims.play('click');
+        this.time.delayedCall(5000, () => {
+            this.clicker.destroy();
+        }, null, this);
     }
     
     update() {
