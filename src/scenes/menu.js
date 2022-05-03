@@ -22,6 +22,7 @@ class Menu extends Phaser.Scene {
 
 
         this.input.on('pointerdown', () => {
+            this.sound.play('select-sfx', {volume: 0.1});
             this.scene.start('Play');
         });
     }

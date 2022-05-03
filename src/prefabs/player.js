@@ -24,6 +24,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.setDragY(game.settings.jumpPower/2);
         scene.input.on('pointerup', () => {
             this.setVelocityY(-game.settings.jumpPower);
+            scene.sound.play('jump-sfx', {volume: 0.02});
         }, this);
         
         scene.events.on('update', this.update, this);

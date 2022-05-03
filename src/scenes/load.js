@@ -28,8 +28,9 @@ class Load extends Phaser.Scene {
         // load sfx assets
         this.load.audio('drifting-higher', ['sound/Drifting-Higher.mp3', 'sound/Drifting-Higher.ogg']);
         this.load.audio('drifting-away', ['sound/Drifting-Away.mp3', 'sound/Drifting-Higher.ogg']);
-        //this.load.audio('jump-sfx','sound/waterSplash.mp3');
-        //this.load.audio('crash-sfx','sound/Crash.mp3');
+        this.load.audio('jump-sfx','sound/Jump-E.wav');
+        this.load.audio('crash-sfx','sound/Crash-GGfA.wav');
+        this.load.audio('select-sfx', 'sound/Select-b4.wav');
     }
 
     create() {

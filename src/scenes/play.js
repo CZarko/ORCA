@@ -71,6 +71,7 @@ class Play extends Phaser.Scene {
 
         // Esc key returns player to menu
         this.input.keyboard.on('keydown-'+'ESC', () => {
+            this.sound.play('select-sfx', {volume: 0.1});
             this.scene.start('Menu');
         });
 
@@ -102,6 +103,7 @@ class Play extends Phaser.Scene {
         //check if player has touched edges of game screen and if so end game
         if(this.player.body.checkWorldBounds()){
             this.gameOver = true;
+            this.crash();
         }
 
         if(!this.gameOver) {
@@ -180,7 +182,7 @@ class Play extends Phaser.Scene {
             explosion.destroy();
         });
         //Plays sound effect upon crashing
-        //this.sound.play('crash-sfx');
+        this.sound.play('crash-sfx', {volume: 0.1});
     }
 
     // Recursively updates score on delay
