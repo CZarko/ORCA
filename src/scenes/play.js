@@ -55,8 +55,8 @@ class Play extends Phaser.Scene {
         // animation config for explosion
         this.anims.create({
             key: 'explode',
-            frames: this.anims.generateFrameNumbers('explosion', {start: 0, end: 13, first: 0}),
-            frameRate: 30
+            frames: this.anims.generateFrameNumbers('explosion', {start: 0, end: 4, first: 0}),
+            frameRate: 15
         });
 
         // Displays end of game Text
@@ -173,8 +173,8 @@ class Play extends Phaser.Scene {
     crash() {
         this.player.alpha = 0;
         this.player.body.enable = false;
-        let explosion = this.add.sprite(this.player.x, this.player.y, 'explosion').setOrigin(0.5,0.5);
-        explosion.setScale(4);
+        let explosion = this.add.sprite(this.player.x, this.player.y, 'explosion').setScale(0.2).setOrigin(0.5,0.5);
+        this.tweens.add({targets: explosion, scaleX: 0, scaleY: 0, ease: 'Linear', duration: 800});
         explosion.anims.play('explode');
         explosion.on('animationcomplete', () => {
             explosion.destroy();

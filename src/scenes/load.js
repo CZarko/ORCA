@@ -23,7 +23,7 @@ class Load extends Phaser.Scene {
         this.load.image('fighter-jet', 'img/fighter_jet.png');
         this.load.image('cloud-0', 'img/cloud_med_2.png');
         this.load.image('cloud-1', 'img/cloud_long_3.png');
-        this.load.spritesheet('explosion', 'img/explosion.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 13});
+        this.load.spritesheet('explosion', 'img/blood_sheet.png', {frameWidth: 988, frameHeight: 1009, startFrame: 0, endFrame: 4});
 
         // load sfx assets
         this.load.audio('drifting-higher', ['sound/Drifting-Higher.mp3', 'sound/Drifting-Higher.ogg']);
