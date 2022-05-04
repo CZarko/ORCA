@@ -41,7 +41,7 @@ class Play extends Phaser.Scene {
         this.buildings.push(tmp);
 
         //Player Sprite
-        this.player = new Player(this, hPadding*2, yCentered, 'player');
+        this.player = new Player(this, hPadding*2, yCentered, ('player', 'whale_swim_0.png'));
         
         // Creation of planes array and init call to spawnPlane func
         this.planes = [];

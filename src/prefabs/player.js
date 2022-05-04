@@ -3,7 +3,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene,x,y,'player');
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.setScale(0.2);
         this.setOrigin(0.5);
 
         this.invulnerable = false;
@@ -11,8 +10,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         // anim config for player
         scene.anims.create({
             key: 'swim',
-            frames: scene.anims.generateFrameNumbers('player', {start:0, end:2, first: 0}),
-            frameRate: 10,
+            frames: scene.anims.generateFrameNames('player', {prefix: 'whale_swim_', suffix: '.png', end: 2}),
+            frameRate: 8,
             repeat: -1
         });
         this.anims.play('swim');

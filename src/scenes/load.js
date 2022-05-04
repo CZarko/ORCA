@@ -17,7 +17,7 @@ class Load extends Phaser.Scene {
 
         this.load.spritesheet('clicker', 'img/clicker.png', {frameWidth: 881, frameHeight: 1388, startFrame: 0, endFrame: 4});
 
-        this.load.spritesheet('player', 'img/orca_swim.png', {frameWidth: 1000, frameHeight: 518, startFrame: 0, endFrame: 2});
+        this.load.atlas('player', 'img/player-atlas.png', 'img/atlas.json');
         this.load.image('jet-plane', 'img/jet_plane.png');
         this.load.image('big-plane', 'img/big_airplane.png');
         this.load.image('fighter-jet', 'img/fighter_jet.png');
